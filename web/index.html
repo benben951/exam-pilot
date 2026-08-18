@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExamPilot</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div>
+            <h1>ExamPilot</h1>
+            <p>Local-first study system</p>
+          </div>
+        </div>
+        <div class="author-badge">
+          <span>作者</span>
+          <strong>郭兆杰</strong>
+        </div>
+        <nav class="nav" aria-label="主导航">
+          <button class="nav-item active" data-view="dashboard">总览</button>
+          <button class="nav-item" data-view="materials">学习文件</button>
+          <button class="nav-item" data-view="diagnosis">基线诊断</button>
+          <button class="nav-item" data-view="cards">闪卡测验</button>
+          <button class="nav-item" data-view="economics">831经济学</button>
+          <button class="nav-item" data-view="speaking">IELTS口语</button>
+          <button class="nav-item" data-view="review">周复盘</button>
+          <button class="nav-item" data-view="agent">Agent</button>
+          <button class="nav-item" data-view="export">数据</button>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <section class="topbar">
+          <div>
+            <p class="eyebrow">Hand-drawn Star Atlas</p>
+            <h2 id="view-title">总览</h2>
+          </div>
+          <p class="system-note">把资料、错题和复习节奏连成一张自己的星图。</p>
+          <div class="topbar-actions">
+            <button class="ghost-button" id="reset-demo">重置示例</button>
+            <button class="primary-button" id="save-now">保存</button>
+          </div>
+        </section>
+
+        <section class="view active" id="dashboard">
+          <div class="metrics-grid">
+            <article class="metric-card">
+              <span>总学习小时</span>
+              <strong id="metric-hours">0</strong>
+              <small>来自诊断与周复盘记录</small>
+            </article>
+            <article class="metric-card">
+              <span>错题规则</span>
+              <strong id="metric-rules">0</strong>
+              <small>用于复测与主动回忆</small>
+            </article>
+            <article class="metric-card">
+              <span>闪卡</span>
+              <strong id="metric-cards">0</strong>
+              <small>当前卡组容量</small>
+            </article>
+            <article class="metric-card">
+              <span>学习文件</span>
+              <strong id="metric-materials">0</strong>
+              <small>已进入本地学习库</small>
+            </article>
+            <article class="metric-card">
+              <span>最高风险</span>
+              <strong id="metric-risk">待诊断</strong>
+              <small>按最近记录自动估计</small>
+            </article>
+          </div>
+
+          <section class="panel monitoring-panel">
+            <div class="panel-header">
+              <h3>持续监测</h3>
+              <span>Study Operations Monitor</span>
+            </div>
+            <div class="monitoring-summary" id="monitoring-summary"></div>
+            <div class="monitoring-columns">
+              <div>
+                <strong>风险原因</strong>
+                <ul class="action-list" id="monitoring-reasons"></ul>
+              </div>
+              <div>
+                <strong>下一步行动</strong>
+                <ul class="action-list" id="monitoring-actions"></ul>
+              </div>
+            </div>
+          </section>
+
+          <div class="content-grid">
+            <section class="panel wide">
+              <div class="panel-header">
+                <h3>学习地图</h3>
+                <span>Mastery Map</span>
+              </div>
+              <div class="mastery-list" id="mastery-list"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-header">
+                <h3>今天最低动作</h3>
+                <span>Daily Minimum</span>
+              </div>
+              <ul class="action-list" id="daily-actions"></ul>
+            </section>
+          </div>
+
+          <div class="content-grid">
+            <section class="panel wide">
+              <div class="panel-header">
+                <h3>阶段任务</h3>
+                <span>Monthly Targets</span>
+              </div>
+              <div class="phase-list" id="phase-list"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-header">
+                <h3>本周检查</h3>
+                <span>Review Checklist</span>
+              </div>
+              <ul class="action-list">
+                <li>数学：知能行时长、薄弱章节、错题复测。</li>
+                <li>831：教材章节、Anki 新增、真题输出。</li>
+                <li>英语/雅思：主动训练次数，不算背景音。</li>
+                <li>求职技术：只记录外企 AI 风控相关推进。</li>
+              </ul>
+            </section>
+          </div>
+
+          <div class="content-grid">
+            <section class="panel wide">
+              <div class="panel-header">
+                <h3>薄弱点雷达</h3>
+                <span>Backend Signals</span>
+              </div>
+              <div class="weakness-list" id="backend-weakness-list"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-header">
+                <h3>资料缺口</h3>
+                <span>OCR / Index</span>
+              </div>
+              <div class="weakness-list" id="backend-gap-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="materials">
+          <div class="content-grid">
+            <section class="panel wide">
+              <div class="panel-header">
+                <h3>添加学习文件</h3>
+                <span>Auto tag · Stage · Quiz</span>
+              </div>
+              <div class="material-tools">
+                <div class="api-strip">
+                  <div>
+                    <strong>本地预装资料</strong>
+                    <p>从你已经索引过的备考笔记里导入资料卡片，不会上传到外网。</p>
+                  </div>
+                  <button class="primary-button" id="preload-materials" type="button">导入本地笔记</button>
+                </div>
+                <label>
+                  上传文本资料
+                  <input id="material-file" type="file" multiple accept=".txt,.md,.json,.jsonl,.csv" />
+                </label>
+                <label>
+                  或粘贴资料
+                  <textarea id="material-text" rows="8" placeholder="粘贴真题、笔记、模型卡片、错题记录或复习资料摘要。"></textarea>
+                </label>
+                <div class="material-actions">
+                  <button class="primary-button" id="add-material-text" type="button">加入学习库</button>
+                  <button class="ghost-button" id="generate-quiz" type="button">生成阶段测验</button>
+                </div>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-header">
+                <h3>阶段策略</h3>
+                <span>Roadmap</span>
+              </div>
+              <div class="stage-list">
+                <article>
+                  <strong>初级</strong>
+                  <p>识别概念、公式、关键词，先能说清楚“是什么”。</p>
+                </article>
+                <article>
+                  <strong>中级</strong>
+                  <p>做基础题和同类题，能解释条件、方法和常见陷阱。</p>
+                </article>
+                <article>
+                  <strong>高级</strong>
+                  <p>限时综合题、迁移题、真题复盘，能稳定输出答案结构。</p>
+                </article>
+              </div>
+            </section>
+          </div>
+
+          <div class="content-grid">
+            <section class="panel wide">
+              <div class="panel-header">
+                <h3>资料库</h3>
+                <span id="material-count">0 份</span>
+              </div>
+              <div class="material-list" id="material-list"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-header">
+                <h3>知识点建议</h3>
+                <span>Adaptive advice</span>
+              </div>
+              <div class="recommendation-list" id="recommendation-list"></div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h3>资料检索与证据</h3>
+              <span>Local RAG Evidence</span>
+            </div>
+            <div class="search-tools">
+              <input id="material-search-input" type="search" placeholder="输入关键词：831、效用、软微真题、长难句、作文..." />
+              <button class="primary-button" id="material-search-button" type="button">检索</button>
+            </div>
+            <div class="evidence-layout">
+              <div class="search-results" id="material-search-results"></div>
+              <div class="evidence-detail" id="material-detail"></div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h3>阶段测验</h3>
+              <span id="quiz-count">0 题</span>
+            </div>
+            <div class="quiz-list" id="quiz-list"></div>
+          </section>
+        </section>
+
+        <section class="view" id="diagnosis">
+          <form class="panel form-panel" id="diagnosis-form">
+            <div class="panel-header">
+              <h3>基线诊断</h3>
+              <span>5 分钟录入一次真实状态</span>
+            </div>
+            <div class="form-grid">
+              <label>
+                科目
+                <select name="subject">
+                  <option value="数学">数学</option>
+                  <option value="英语一">英语一</option>
+                  <option value="831经济学">831经济学</option>
+                  <option value="高考语文">高考语文</option>
+                  <option value="高考数学">高考数学</option>
+                  <option value="高考英语">高考英语</option>
+                  <option value="高考历史">高考历史</option>
+                  <option value="高考政治">高考政治</option>
+                  <option value="高考地理">高考地理</option>
+                  <option value="雅思">雅思</option>
+                  <option value="技术/竞赛">技术/竞赛</option>
+                </select>
+              </label>
+              <label>
+                学习小时
+                <input name="hours" type="number" min="0" step="0.5" value="1.5" />
+              </label>
+              <label>
+                正确率
+                <input name="accuracy" type="number" min="0" max="100" step="1" value="60" />
+              </label>
+              <label>
+                主要错误
+                <select name="errorType">
+                  <option value="概念不清">概念不清</option>
+                  <option value="方法选错">方法选错</option>
+                  <option value="计算错误">计算错误</option>
+                  <option value="定位错误">定位错误</option>
+                  <option value="表达不足">表达不足</option>
+                  <option value="没有开始">没有开始</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              今天学了什么
+              <textarea name="note" rows="4" placeholder="例如：知能行极限诊断，错在等价无穷小适用条件。"></textarea>
+            </label>
+            <label>
+              下次规则
+              <textarea name="rule" rows="3" placeholder="例如：看到极限乘除结构，先判断是否可直接替换，再看是否满足趋近条件。"></textarea>
+            </label>
+            <button class="primary-button" type="submit">加入诊断记录</button>
+          </form>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h3>最近记录</h3>
+              <span id="record-count">0 条</span>
+            </div>
+            <div class="record-list" id="record-list"></div>
+          </section>
+        </section>
+
+        <section class="view" id="cards">
+          <div class="content-grid">
+            <section class="panel wide">
+              <div class="panel-header">
+                <h3>主动回忆</h3>
+                <span id="card-position">0 / 0</span>
+              </div>
+              <div class="flashcard" id="flashcard">
+                <p class="card-topic" id="card-topic">暂无卡片</p>
+                <h3 id="card-front">先生成或导入闪卡</h3>
+                <p class="card-back hidden" id="card-back"></p>
+              </div>
+              <div class="card-actions">
+                <button class="ghost-button" id="prev-card">上一张</button>
+              <button class="primary-button" id="show-answer">显示答案</button>
+              <button class="ghost-button" id="next-card">下一张</button>
+              <button class="ghost-button" id="load-db-cards">加载后端题库</button>
+            </div>
+            </section>
+            <section class="panel">
+              <div class="panel-header">
+                <h3>导入 JSONL</h3>
+                <span>兼容脚本生成的闪卡</span>
+              </div>
+              <textarea id="card-import" rows="10" placeholder='{"front":"问题","back":"答案","subject":"经济学","topic":"消费者理论"}'></textarea>
+              <button class="primary-button" id="import-cards">导入闪卡</button>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="economics">
+          <div class="content-grid">
+            <section class="panel wide">
+              <div class="panel-header">
+                <h3>831 经济学制卡台</h3>
+                <span>DeepSeek · Anki · 真题输出</span>
+              </div>
+              <div class="economics-lab">
+                <div class="form-grid compact-grid">
+                  <label>
+                    牌组
+                    <select id="econ-deck">
+                      <option value="831经济学::微观">831经济学::微观</option>
+                      <option value="831经济学::宏观">831经济学::宏观</option>
+                      <option value="831经济学::真题">831经济学::真题</option>
+                      <option value="831经济学::错题">831经济学::错题</option>
+                    </select>
+                  </label>
+                  <label>
+                    主题
+                    <input id="econ-topic" type="text" value="微观::消费者理论" />
+                  </label>
+                  <label>
+                    来源
+                    <input id="econ-source" type="text" value="尼克尔森/曼昆/软微真题" />
+                  </label>
+                  <label>
+                    卡片数
+                    <input id="econ-limit" type="number" min="1" max="20" value="8" />
+                  </label>
+                </div>
+                <label>
+                  粘贴教材小节、错题、真题解析或你的答案
+                  <textarea id="econ-input" rows="13" placeholder="一次只粘贴一小节或一道题。比如：尼克尔森消费者理论的一段推导、曼昆课后题答案、软微真题解析、你自己的错题复盘。"></textarea>
+                </label>
+                <div class="economics-actions">
+                  <button class="primary-button" id="econ-generate" type="button">生成卡片</button>
+                  <button class="ghost-button" id="econ-sync" type="button" disabled>同步到 Anki</button>
+                  <span id="econ-status">等待输入</span>
+                </div>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-header">
+                <h3>今天怎么用</h3>
+                <span>Low friction</span>
+              </div>
+              <div class="stage-list">
+                <article>
+                  <strong>1. 小块学习</strong>
+                  <p>只处理一小节教材或一道题，不要一次塞完整 PDF。</p>
+                </article>
+                <article>
+                  <strong>2. 先预览</strong>
+                  <p>生成后删掉太泛、太碎、不能服务考试输出的卡。</p>
+                </article>
+                <article>
+                  <strong>3. 再同步</strong>
+                  <p>打开 Anki 和 AnkiConnect 后同步。若端口冲突，先关闭网页服务。</p>
+                </article>
+              </div>
+            </section>
+          </div>
+          <section class="panel">
+            <div class="panel-header">
+              <h3>卡片预览</h3>
+              <span id="econ-preview-count">0 张</span>
+            </div>
+            <div class="economics-card-list" id="econ-card-list">
+              <div class="empty-state">生成后会在这里预览卡片正面、背面和考试提示。</div>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="speaking">
+          <div class="content-grid">
+            <section class="panel wide">
+              <div class="panel-header">
+                <h3>IELTS 口语练习</h3>
+                <span>Question · Record · Feedback</span>
+              </div>
+              <div class="speaking-lab">
+                <div class="speaking-controls">
+                  <label>
+                    题型
+                    <select id="speaking-part">
+                      <option value="part1">Part 1 日常问答</option>
+                      <option value="part2">Part 2 个人陈述</option>
+                      <option value="part3">Part 3 深度讨论</option>
+                    </select>
+                  </label>
+                  <button class="ghost-button" id="speaking-new-question" type="button">换题</button>
+                </div>
+                <article class="speaking-question-card">
+                  <p id="speaking-part-label">Part 1</p>
+                  <h3 id="speaking-question">正在加载题目</h3>
+                  <small id="speaking-target">建议 30-45 秒回答</small>
+                </article>
+                <div class="recording-panel">
+                  <div class="recording-status" id="recording-status">
+                    <strong>未录音</strong>
+                    <span>浏览器会请求麦克风权限，录音只保存在本地页面。</span>
+                  </div>
+                  <div class="recording-actions">
+                    <button class="primary-button" id="record-start" type="button">开始录音</button>
+                    <button class="ghost-button" id="record-stop" type="button" disabled>停止录音</button>
+                    <button class="ghost-button" id="speech-recognize" type="button">自动识别</button>
+                  </div>
+                  <audio id="speaking-audio" controls></audio>
+                </div>
+                <label>
+                  回答转写
+                  <textarea id="speaking-transcript" rows="8" placeholder="先录音，再把你说的内容粘贴/手动整理到这里。下一步可以接 Azure Speech 自动转写和发音评估。"></textarea>
+                </label>
+                <div class="speaking-actions">
+                  <button class="primary-button" id="speaking-submit" type="button">提交分析</button>
+                  <button class="ghost-button" id="speaking-save-memory" type="button">保存为学习记录</button>
+                </div>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-header">
+                <h3>反馈</h3>
+                <span id="speaking-api-status">Local first</span>
+              </div>
+              <div class="speaking-feedback" id="speaking-feedback">
+                <div class="empty-state">完成一次回答后，这里会给出分数估计、流利度、词汇、语法、发音接口状态和下一步练习建议。</div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="review">
+          <div class="content-grid">
+            <form class="panel form-panel wide" id="review-form">
+              <div class="panel-header">
+                <h3>周复盘生成器</h3>
+                <span>压缩成下周可执行动作</span>
+              </div>
+              <div class="form-grid">
+                <label>
+                  本周数学
+                  <textarea name="math" rows="3" placeholder="知能行时长、薄弱章节、错题复测率。"></textarea>
+                </label>
+                <label>
+                  本周英语/雅思
+                  <textarea name="english" rows="3" placeholder="主动训练次数、真题/听力/口语，不算背景音。"></textarea>
+                </label>
+                <label>
+                  本周 831
+                  <textarea name="economics" rows="3" placeholder="教材章节、做题本、Anki新增、真题输出。"></textarea>
+                </label>
+                <label>
+                  本周求职/技术/状态
+                  <textarea name="other" rows="3" placeholder="外企AI风控相关推进、睡眠、运动、焦虑。"></textarea>
+                </label>
+              </div>
+              <button class="primary-button" type="submit">生成并保存复盘</button>
+            </form>
+            <section class="panel">
+              <div class="panel-header">
+                <h3>问 DeepSeek</h3>
+                <span>Study Copilot</span>
+              </div>
+              <div class="deepseek-box">
+                <textarea id="deepseek-question" rows="8" placeholder="问学习问题：比如根据本周复盘，数学和831下周怎么调整？或者解释某个经济学模型。"></textarea>
+                <button class="primary-button" id="deepseek-ask" type="button">提问</button>
+              </div>
+            </section>
+          </div>
+          <section class="panel">
+            <div class="panel-header">
+              <h3>复盘结果 / DeepSeek 回复</h3>
+              <span>Saved locally</span>
+            </div>
+            <pre class="review-output" id="review-output"></pre>
+          </section>
+          <section class="panel">
+            <div class="panel-header">
+              <h3>复盘历史</h3>
+              <span id="review-history-count">0 条</span>
+            </div>
+            <div class="review-history" id="review-history"></div>
+          </section>
+        </section>
+
+        <section class="view" id="agent">
+          <div class="content-grid">
+            <section class="panel wide">
+              <div class="panel-header">
+                <h3>任务板</h3>
+                <span>OCR / Review / Quiz</span>
+              </div>
+              <form class="task-form" id="task-form">
+                <input name="title" type="text" placeholder="添加任务：例如 清洗 831 真题闪卡" required />
+                <select name="lane">
+                  <option value="ocr">OCR</option>
+                  <option value="cards">闪卡</option>
+                  <option value="review">复盘</option>
+                  <option value="system">系统</option>
+                </select>
+                <select name="priority">
+                  <option value="high">高</option>
+                  <option value="medium" selected>中</option>
+                  <option value="low">低</option>
+                </select>
+                <button class="primary-button" type="submit">加入</button>
+              </form>
+              <div class="task-board" id="task-board"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-header">
+                <h3>长期记忆</h3>
+                <span>Observations</span>
+              </div>
+              <form class="memory-form" id="memory-form">
+                <input name="subject" type="text" placeholder="科目/主题，例如 831经济学" />
+                <textarea id="memory-text" name="text" rows="5" placeholder="记录一个长期有用的观察：比如某类错题反复出现、某份资料质量很高、某个策略有效。"></textarea>
+                <button class="ghost-button" id="voice-dictate" type="button">语音录入</button>
+                <button class="primary-button" type="submit">保存记忆</button>
+              </form>
+              <div class="memory-list" id="memory-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="export">
+          <section class="panel">
+            <div class="panel-header">
+              <h3>本地数据</h3>
+              <span>保存在浏览器 localStorage</span>
+            </div>
+            <div class="data-actions">
+              <button class="primary-button" id="export-json">导出 JSON</button>
+              <button class="primary-button" id="ai-analyze">调用 AI 分析</button>
+              <button class="ghost-button" id="copy-codex-prompt">复制给 Codex 的提示</button>
+              <button class="ghost-button" id="clear-data">清空本地数据</button>
+            </div>
+            <textarea id="data-output" rows="18" readonly></textarea>
+          </section>
+        </section>
+      </main>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
