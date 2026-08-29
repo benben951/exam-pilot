@@ -1,0 +1,108 @@
+{
+  "version": "1.0",
+  "updated": "2026-08-02",
+  "description": "2027北大软微金科初试的唯一量化目标源。目标分不是预测分，实际水平只取自合格留出测评。",
+  "months": {
+    "2026-08": {
+      "stage": "三科校准与深化",
+      "score_target": null,
+      "score_note": "课程未闭合，不汇总整科总分；完成三科阶段诊断并建立真实基线。",
+      "targets": {
+        "math": {"active_days": 24, "three_star_chapters": null, "coverage": "知能行高数与线代按当前进度推进；10月前各章3星"},
+        "english": {"vocab_days": 24, "timed_readings": 16, "reading_accuracy": 0.60, "minutes_per_passage": 25, "coverage": "2003年起真题阅读：定位、同义替换、陷阱和关键生词"},
+        "831": {"foundation_sessions": 10, "model_cards": 8, "closed_book_reviews": 8, "recall_pass_rate": 0.60, "coverage": "前置数学、消费者、生产者；通过后再进入垄断与博弈论"},
+        "politics": {"questions": 0, "coverage": "未启动"},
+        "acp": {"weekday_sessions": 6, "weekend_sessions": 1, "coverage": "大数据与大模型题库启动；建立模块基线和错题分类"}
+      },
+      "weekly_quota": {"math_active_days": 6, "english_readings": 4, "english_vocab_days": 6, "831_foundation_sessions": 5, "831_model_cards": 2, "831_closed_book_reviews": 2, "acp_weekday_sessions": 5, "acp_weekend_sessions": 1},
+      "weekly_tests": [
+        {"subject": "math", "minutes": 60, "content": "积分模块首次限时诊断；记录正确率和错因"},
+        {"subject": "831", "minutes": 60, "content": "基础工具与消费者模型小测：边际、最优化、预算约束、最简单拉格朗日"},
+        {"subject": "english", "minutes": 45, "content": "2篇未做阅读连续限时；记录10题得分"},
+        {"subject": "831", "minutes": 90, "content": "消费者与生产者阶段测：能否独立写目标、约束和一阶条件"},
+        {"subject": "831", "minutes": 90, "content": "8月微观阶段卷；复测六题中的基础题并完成月度验收"}
+      ],
+      "forecast_eligible_target": {"politics": 0, "english": 0, "math": 0, "831": 0}
+    },
+    "2026-09": {
+      "stage": "首轮覆盖闭合",
+      "score_target": null,
+      "score_note": "月底各科完成第一次整科基线；基线只描述现状，不反推录取概率。",
+      "targets": {
+        "math": {"active_days": 24, "three_star_chapters": null, "coverage": "知能行高数与线代继续推进；月末校验10月前全章3星是否可达"},
+        "english": {"vocab_days": 24, "timed_readings": 16, "reading_accuracy": 0.65, "minutes_per_passage": 22, "cloze_sessions": 4, "coverage": "真题阅读并启动完形"},
+        "831": {"model_cards": 12, "closed_book_reviews": 12, "recall_pass_rate": 0.70, "coverage": "GDP、IS-LM、Solow，专业课首轮闭合"},
+        "politics": {"questions": 0, "coverage": "10月15日启动；本月不占学习时段"},
+        "acp": {"weekday_sessions_before_exam": 16, "weekend_sessions_before_exam": 3, "mock_exams": 2, "exam_date": "2026-09-23", "coverage": "大数据与大模型题库、错题回炉和考前模拟"}
+      },
+      "weekly_quota": {"math_active_days": 6, "english_readings": 4, "english_vocab_days": 6, "english_cloze_sessions": 1, "831_model_cards": 3, "831_closed_book_reviews": 3, "acp_weekday_sessions": 5, "acp_weekend_sessions": 1},
+      "weekly_tests": [
+        {"subject": "math", "minutes": 75, "content": "微分方程与线代首次限时模块测"},
+        {"subject": "831", "minutes": 75, "content": "GDP与IS-LM闭卷计算/论述测"},
+        {"subject": "english", "minutes": 60, "content": "2篇未做阅读连续限时 + 1组完形；记录分题型得分"},
+        {"subject": "english", "minutes": 60, "content": "本月阅读与完形阶段复测"},
+        {"subject": "math", "minutes": 150, "content": "数学二首轮基线卷；首次、限时、无提示"}
+      ],
+      "forecast_eligible_target": {"politics": 1, "english": 1, "math": 1, "831": 1}
+    },
+    "2026-10": {
+      "stage": "真题一轮",
+      "score_target": {"politics": 60, "english": 65, "math": 115, "831": 110, "total": 350},
+      "score_note": "月末目标，不代表当前预测。",
+      "targets": {
+        "math": {"prediction_papers": 4, "coverage": "李艳芳等预测卷/超越卷与知能行定向回炉"},
+        "english": {"timed_readings": 16, "cloze_sessions": 4, "new_type_sessions": 4, "translation_sessions": 4, "coverage": "阅读、完形、新题型和翻译；近年整卷留出"},
+        "831": {"full_papers": 4, "closed_book_reviews": 12, "coverage": "18-25真题一轮"},
+        "politics": {"active_days_after_start": 14, "questions": 400, "choice_accuracy": 0.60, "current_affairs_reviews": 2, "coverage": "10月15日起基础框架、选择题与每周时政专题"}
+      },
+      "weekly_quota": {"math_full_papers": 1, "english_readings": 4, "english_cloze_sessions": 1, "english_new_type_sessions": 1, "english_translation_sessions": 1, "831_full_papers": 1, "831_closed_book_reviews": 3, "politics_questions_after_start": 200, "politics_current_affairs_reviews_after_start": 1},
+      "weekly_tests": [
+        {"subject": "math", "minutes": 150, "content": "数学二未做真题/模拟卷，完整限时"},
+        {"subject": "831", "minutes": 180, "content": "831未做真题，完整限时"},
+        {"subject": "english", "minutes": 90, "content": "2篇未做阅读连续限时 + 完形/新题型/翻译各1组"},
+        {"subject": "politics", "minutes": 50, "content": "50题选择题限时周测"},
+        {"subject": "math", "minutes": 150, "content": "月末数学留出测评"}
+      ],
+      "forecast_eligible_target": {"politics": 1, "english": 1, "math": 1, "831": 1}
+    },
+    "2026-11": {
+      "stage": "真题二轮与背诵",
+      "score_target": {"politics": 68, "english": 72, "math": 132, "831": 120, "total": 392},
+      "score_note": "月末目标，不代表当前预测。",
+      "targets": {
+        "math": {"full_papers": 6, "error_rules": 10, "coverage": "真题与模拟卷、错题回炉"},
+        "english": {"timed_readings": 16, "writing_outputs": 6, "coverage": "阅读与小三门保持，启动大小作文"},
+        "831": {"full_papers": 4, "closed_book_reviews": 16, "coverage": "真题二轮与背诵手册"},
+        "politics": {"questions_cumulative": 1800, "choice_accuracy": 0.70, "current_affairs_reviews": 4, "coverage": "选择题、时政专题、模拟材料与主观题框架"}
+      },
+      "weekly_quota": {"math_full_papers": 1.5, "english_readings": 4, "english_writing_outputs": 1.5, "831_full_papers": 1, "831_closed_book_reviews": 4, "politics_questions": 250, "politics_current_affairs_reviews": 1},
+      "weekly_tests": [
+        {"subject": "math", "minutes": 150, "content": "数学二完整留出测评"},
+        {"subject": "831", "minutes": 180, "content": "831完整留出测评"},
+        {"subject": "english", "minutes": 120, "content": "阅读与小三门阶段测 + 大小作文首次限时输出；近年整卷继续留出"},
+        {"subject": "politics", "minutes": 50, "content": "政治选择题留出测评"},
+        {"subject": "math", "minutes": 150, "content": "月末四科缺口优先测评"}
+      ],
+      "forecast_eligible_target": {"politics": 2, "english": 2, "math": 2, "831": 2}
+    },
+    "2026-12": {
+      "stage": "冲刺与考试状态",
+      "score_target": {"politics": 70, "english": 75, "math": 140, "831": 125, "total": 410},
+      "score_note": "作战目标，不是录取承诺；正式概率仍由留出测评模型计算。",
+      "targets": {
+        "math": {"full_papers_before_exam": 4, "coverage": "错题回炉与手感"},
+        "english": {"full_papers_before_exam": 2, "writing_outputs": 6, "coverage": "作文定型与整卷节奏"},
+        "831": {"full_papers_before_exam": 2, "closed_book_reviews": 20, "coverage": "背诵手册与真题三刷"},
+        "politics": {"questions_cumulative": 2600, "choice_accuracy": 0.76, "coverage": "多源冲刺材料、主观题表达、时政覆盖与选择题回炉"}
+      },
+      "weekly_quota": {"math_full_papers": 1, "english_writing_outputs": 2, "831_closed_book_reviews": 6, "politics_questions": 200, "politics_current_affairs_reviews": 1},
+      "weekly_tests": [
+        {"subject": "math", "minutes": 150, "content": "数学二完整模拟，校准时间分配"},
+        {"subject": "831", "minutes": 180, "content": "831完整模拟，校准书写与取舍"},
+        {"subject": "english", "minutes": 180, "content": "英语一完整模拟，校准作文时间"},
+        {"subject": "politics", "minutes": 50, "content": "政治选择题最终校准"}
+      ],
+      "forecast_eligible_target": {"politics": 2, "english": 2, "math": 2, "831": 2}
+    }
+  }
+}

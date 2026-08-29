@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "updated": "2026-08-22",
+  "layers": {
+    "raw": "原始证据，保留来源、原文、页面和文件，不在此层改写结论",
+    "wiki": "按概念、模型、错题规则和策略组织的可复用知识",
+    "query": "临时问题与综合回答，默认不自动回流",
+    "promote": "经过人工判断、来源标注和冲突检查后回流Wiki",
+    "lint": "检查来源缺失、重复、冲突、过期政策和未复核结论"
+  },
+  "claim_required_fields": ["claim", "source_path", "source_type", "evidence_grade", "status", "last_checked", "next_check"],
+  "source_types": ["official", "textbook", "individual", "training_blog", "platform"],
+  "evidence_grades": {"A": "官方或原始数据", "B": "多来源一致且可核验", "C": "单个经验或未完全核验", "D": "营销、推测或仅作线索"},
+  "promotion_gate": ["来源明确", "适用范围明确", "与已有结论无未处理冲突", "有验证方式或复核日期"],
+  "policy_rule": "2027北大软微政策只接受北大研招网、软微学院官网、教育部/研招网和湖南省教育考试院正式公告",
+  "prior_art_rule": "第三方GitHub项目和公众号只提供工作流机制参考；不得直接作为考试事实、分数目标或录取概率证据",
+  "maimemo_rule": "墨墨API仅用于英语词汇学习数据和云词本管理；Token只存本机环境变量或密码管理器，不写入Markdown、JSON、Git或聊天记录"
+}

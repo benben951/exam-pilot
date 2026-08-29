@@ -1,0 +1,67 @@
+﻿{
+  "version": "1.0",
+  "updated": "2026-08-10",
+  "status": "baseline_in_progress",
+  "note": "当前进度必须由用户真实汇报补齐；未知值保持 null，不冒充处理。",
+  "exam_registration": {
+    "exam_cycle": "2027鍏ㄥ浗纭曞＋鐮旂┒鐢熸嫑鐢熻€冭瘯",
+    "preferred_exam_city": "闀挎矙",
+    "registration_status": "not_started",
+    "exam_site_status": "not_confirmed",
+    "reminder_window": "2026-09-01起每周复查教育部、研招网、湖南省和长沙报考点公告；若未公布则继续保持尚未公布。",
+    "required_checks": [
+      "核验教育部与研招网正式公告",
+      "确认长沙可选报考点及户籍/工作/社保/居住材料要求",
+      "完成网上报名并核对报名号与缴费状态",
+      "完成报考点网上确认并保存准考材料"
+    ]
+  },
+  "subjects": {
+    "math": {
+      "current_module": "第一章",
+      "zhinenxing_stars": 1,
+      "zhinenxing_progress_pct": 67,
+      "chapter_targets": {"第一章": 3},
+      "star_time_estimates_min": {},
+      "recent_accuracy": null,
+      "last_assessed": null,
+      "route": "10月前只用知能行推进高数与线代各章至3星；10月起进入李艳芳等预测卷和超越卷"
+    },
+    "english": {
+      "current_material": "英语一真题 + 小三门专项 + 作文 + 墨墨背单词",
+      "last_passage": null,
+      "recent_reading_accuracy": null,
+      "last_assessed": null,
+      "route": "墨墨词汇每日同步；真题阅读按年份顺序；9月完形、10月新题型与翻译、11月作文、12月整卷模拟",
+      "holdout_full_papers": [2022, 2023, 2024, 2025, 2026],
+      "vocab_tool": "墨墨背单词",
+      "vocab_api_status": "connected_snapshot_available",
+      "vocab_metrics": ["date", "new_words", "reviewed_words", "due_words", "mastery_or_recall_rate", "source_notebook"]
+    },
+    "831": {
+      "current_chapter": "鍓嶇疆鏁板涓庢牳蹇冩ā鍨嬪熀纭€閲嶅缓",
+      "model_cards_total": null,
+      "recent_recall_pass_rate": 0.0,
+      "last_assessed": "2026-08-03",
+      "baseline": {
+        "assessment": "831鍏鍓嶇疆璇婃柇",
+        "independent_completed": 0,
+        "total": 6,
+        "observation": "棰樼洰涓庢帹瀵肩洰鍓嶅潎鏃犳硶鐞嗚В",
+        "interpretation": "尚未建立经济学数学语言和模型结构，不适合直接使用压缩错题集推进"
+      },
+      "next_action": "完成两周、10次基础重建后复测同类六题",
+      "route": "先学尼科尔森微观，再学曼昆宏观；学长题集作为主练习；数理经济学、就酱背经济、B站扫盲和Codex只补具体断点，不并行通读"
+    },
+    "politics": {"platform": "苍盾1000题", "mock_exam": "苍盾十次全国模考", "later_materials": "肖八、肖四", "questions_total": null, "recent_choice_accuracy": null, "last_assessed": null, "planned_start": "2026-10-15", "route": "10月15日起苍盾1000题建立选择题基础；苍盾十次全国模考用于限时阶段测；肖八用于11月查漏，肖四用于12月冲刺主观题与整卷校准"},
+    "acp": {
+      "exam_date": "2026-09-23",
+      "materials": "ACP大数据与大模型题库",
+      "current_module": null,
+      "recent_accuracy": null,
+      "schedule": "工作日午间35分钟；周六120分钟；9月22日结束新增学习",
+      "status": "preparing"
+    }
+  }
+}
+
