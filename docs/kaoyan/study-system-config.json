@@ -4,6 +4,8 @@
   "timezone": "Asia/Shanghai",
   "planning": {
     "calibration_days": 3,
+    "rolling_calibration_days": 21,
+    "daily_change_limit": 0.20,
     "recovery_threshold": 0.6,
     "budgets_min": {
       "weekday": {"calibration": 180, "recovery": 120, "standard": 300},
@@ -11,6 +13,7 @@
       "sunday": {"calibration": 210, "recovery": 150, "standard": 330}
     },
     "minimum_block_min": 20,
+    "vocab_default_minutes": 45,
     "recall_block_min": 15
   },
   "phases": [
@@ -73,6 +76,7 @@
   "weekday_evening_subject": {"1": "english", "2": "831", "3": "831", "4": "english", "5": "831", "6": "831", "7": "review"},
   "assessment_policy": {
     "monthly_update": true,
+    "baseline_excluded_from_probability": true,
     "target_eligible_assessments_per_subject": 2,
     "eligible_kinds": ["target_past_paper", "full_mock", "subject_mock"],
     "required_flags": ["timed", "first_attempt", "holdout"],
